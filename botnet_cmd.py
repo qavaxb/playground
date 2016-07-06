@@ -4,27 +4,27 @@ import socket
 
 
 logging.basicConfig(level=logging.DEBUG)
-
+LOGGER = logging.getLogger(name='botnet_cmd')
 
 def remote_procedure_call(server_address, cmd='ls'):
     sock = socket.create_connection(server_address)
-    logging.log(logging.DEBUG, msg='connecting to %s port %s' % server_address)
-    #TODO: sanitize cmd
+    LOGGER.log(logging.DEBUG, msg='connecting to %s port %s' % server_address)
+    # TODO: sanitize cmd
 
     try:
         # Send data
-        logging.log(logging.DEBUG, msg='sending "%s"' % cmd)
+        LOGGER.log(logging.DEBUG, msg='sending "%s"' % cmd)
         if cmd is not None:
             sock.sendall(bytes(cmd, encoding='utf-8'))
         else:
-            logging.log(logging.DEBUG, msg="empty command")
+            LOGGER.log(logging.DEBUG, msg="empty command")
 
         # Look for the response
         amount_received = 1
         minimal_expected = 5
         response = ''
 
-        while amount_received :
+        while amount_received:
             data = sock.recv(16).decode()
             amount_received = len(data)
             if amount_received:
@@ -35,10 +35,10 @@ def remote_procedure_call(server_address, cmd='ls'):
             if minimal_expected:
                 minimal_expected -= 1
 
-        logging.log(logging.DEBUG, msg='received "%s"' % response)
+        LOGGER.log(logging.DEBUG, msg='received "%s"' % response)
 
     finally:
-        logging.log(logging.DEBUG, msg='closing socket')
+        LOGGER.log(logging.DEBUG, msg='closing socket')
         sock.close()
 
 
