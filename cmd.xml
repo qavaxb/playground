@@ -1,1 +1,6 @@
-<Node/>
+<execute>
+    <command timeout="2">ls -la /etc/</command>
+    <command>ls -l /home/ /tmp/</command>
+    <command timeout="1">sleep 2</command>
+    <command timeout="2">echo 'juz wstalem'</command>
+</execute>

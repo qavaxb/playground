@@ -44,13 +44,18 @@ def remote_procedure_call(server_address, cmd='ls'):
 
 def _prepare_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--port', type=int, default=1337,
-                    help='TCP connection port number')
-    parser.add_argument('--host', default="127.0.0.1",
-                    help='TCP connection host IP')
-    parser.add_argument('--cmd', default="",
+    parser.add_argument('--port',
+                        type=int,
+                        default=1337,
+                        help='TCP connection port number')
+    parser.add_argument('--host',
+                        default="127.0.0.1",
+                        help='TCP connection host IP')
+    parser.add_argument('--cmd',
+                        default="",
                         help='command to execute on remote target')
-    parser.add_argument('--file', type=argparse.FileType('r'),
+    parser.add_argument('--file',
+                        type=argparse.FileType('r'),
                         help='XML file with commands')
 
     return parser.parse_args()
